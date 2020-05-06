@@ -3,11 +3,29 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import Users from  './components/users/users'
+import Contact from './components/contact-us/contact-us'
+import Header from './components/header/header';
+import Todo from './components/todo/todo'
+import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
 
-ReactDOM.render(
+const routing = (
   <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Router>
+    <div>
+    <Header />
+      <Route exact path="/" component={Todo} />
+      <Route exact path="/app" component={App} />
+      <Route path="/users" component={Users} />
+      <Route path="/contact" component={Contact} />
+    </div>
+  </Router>
+  </React.StrictMode>
+)
+ReactDOM.render(
+  
+   routing
+  ,
   document.getElementById('root')
 );
 
