@@ -1,8 +1,11 @@
 import React from "react";
+import Api from '../../http/axios'
 const axios = require('axios')
+
 class todo extends React.Component {
     constructor() {
         super()
+        this.api =  new Api()
         this.state = {
             tasks: [{ task: 'Create a react App' },
             { task: 'Add routing' },
@@ -10,18 +13,23 @@ class todo extends React.Component {
 
             ],
             users: [],
-            newTask: ""
+            newTask: "",
         };
 
     }
 
     componentDidMount() {
-        console.log("component did mount called");
-        axios.get('http://localhost:4545/file/users')
-            .then(response => {
-                console.log("response is", response);
-                this.setState({ users: response.data.data })
-            })
+       
+        this.api.getRequest()
+        .then(response=>{
+            console.log("response is",response);
+            this.setState({ users: response.data.data })
+        })
+        // axios.get('http://localhost:4545/file/users')
+        //     .then(response => {
+        //         console.log("response is", response);
+        //         this.setState({ users: response.data.data })
+        //     })
     }
 
     handleChange = event => {
