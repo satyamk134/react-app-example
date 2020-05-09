@@ -7,10 +7,14 @@ import Users from  './components/users/users'
 import Contact from './components/contact-us/contact-us'
 import Header from './components/header/header';
 import Todo from './components/todo/todo'
-import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
-
+import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
+import { Provider } from 'react-redux'
+import rootReducer from './reducers'
+import { createStore } from 'redux'
+const store = createStore(rootReducer)
 const routing = (
   <React.StrictMode>
+  <Provider store={store}>
   <Router>
     <div>
     <Header />
@@ -20,6 +24,7 @@ const routing = (
       <Route path="/contact" component={Contact} />
     </div>
   </Router>
+  </Provider>
   </React.StrictMode>
 )
 ReactDOM.render(
