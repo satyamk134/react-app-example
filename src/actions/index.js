@@ -17,6 +17,13 @@ export const toggleTodo = id =>({
     id
 })
 
+export const setUserLoginStatus =loginStatus =>{
+    console.log("login status",loginStatus)
+    return ({
+    type: 'SET_LOGIN_STATUS',
+    loginStatus
+})}
+
 export const VisibilityFilters = {
     SHOW_ALL: 'SHOW_ALL',
     SHOW_COMPLETED: 'SHOW_COMPLETED',

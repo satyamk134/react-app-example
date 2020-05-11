@@ -34,9 +34,10 @@ class Api {
     
     
 
-    getRequest() {
-        console.log("came iside get request")
-        return instance.get('file/users');
+    getRequest({path,data}) {
+        console.log("came iside get request",data)
+        let params = data
+        return instance.get(path,{params});
     }
 
     makeRequest(method){
@@ -54,8 +55,6 @@ class Api {
                 break;
         }
     }
-
-    
 }
 
 

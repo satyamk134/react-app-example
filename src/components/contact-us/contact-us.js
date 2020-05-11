@@ -1,7 +1,10 @@
 import React from 'react'
+import TextField from '@material-ui/core/TextField';
+import ButtonLink  from '../ButtonLink';
 class Contact extends React.Component {
   render() {
-    return <h1>Contact</h1>
+    return <h1>Contact<ButtonLink link="dashboard" text="LOGIN" color="primary" />
+    <ButtonLink className="register-btn" color="secondary" link="register" text="REGISTER" /></h1>
   }
 }
 export default Contact
