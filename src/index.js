@@ -22,7 +22,7 @@ const routing = (
   <Provider store={store}>
   <Router>
      <Switch>
-      <Route exact path="/" component={login} />
+      <Route exact path="/" component={HomeLayout} />
       <Route path="/dashboard" component={AppLayout} />
       <Route path="/login" component={login} />
       <Route path="/login/?id" component={login} />
