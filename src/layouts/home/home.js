@@ -6,7 +6,7 @@ function HomeLayout() {
     console.log("this is home layout component");
     return (
     <Router>
-        
+        <Header />
         <Route exact path='/' component={login} />
     </Router>)
 }

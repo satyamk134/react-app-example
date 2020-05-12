@@ -21,14 +21,17 @@ const routing = (
   <React.StrictMode>
   <Provider store={store}>
   <Router>
-    
-      <Route path="/" component={HomeLayout} />
+     <Switch>
+      <Route exact path="/" component={login} />
       <Route path="/dashboard" component={AppLayout} />
       <Route path="/login" component={login} />
       <Route path="/login/?id" component={login} />
       <Route path="/users" component={Users} />
       <Route path="/contact" component={Contact} />
-      {/* <Route path="*" component={NotFound} /> */}
+       <Route path="*" component={NotFound} />
+     </Switch>
+      
+     
     
       
   </Router>
