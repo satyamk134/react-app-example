@@ -8,6 +8,7 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import { useHistory } from "react-router-dom";
+import { setUserLoginStatus } from '../../actions/index' 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -22,24 +23,32 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
 }));
-
-const  Header = () => {
+const  getLoginStatus = status =>status
+const  Header = ({logout}) => {
   const classes = useStyles();
   const history = useHistory();
+ 
+  const [loggedIn,setlogin] = useState(false);
+  
+  
   useEffect(() => {
     //checking if token is present in localStorage
-    console.log("localStorage.getItem('token') ",localStorage.getItem('token') )
+    //console.log("localStorage.getItem('token') ",localStorage.getItem('token') )
     if(localStorage.getItem('token') == 'undefined' || !localStorage.getItem('token') )
     {
-      console.log("invalid token")
+      //console.log("invalid token");
+      setlogin(false)
     }else{
-      console.log("user is logged in with valid token")
+      //console.log("user is logged in with valid token");
+      setlogin(true)
     }
    
   });
 
  
   const handleClick = useCallback(() => {
+    localStorage.removeItem('token')
+    logout(false)
     history.push('/login')
   })
 
@@ -48,30 +57,41 @@ const  Header = () => {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar className={classes.toolBar}>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+          {loggedIn == true?<IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             <MenuIcon />
-          </IconButton>
+          </IconButton>:''
+          }
+          
           <Typography variant="h6" className={classes.title}>
             MyApp
           </Typography>
-          <Button color="inherit">menu</Button>
-          <Button onClick = {handleClick} color="inherit">Logout</Button>
+          {loggedIn == true && <div><Button color="inherit">menu</Button>
+           <Button onClick = {handleClick} color="inherit">Logout</Button></div>
+           }
+         
         </Toolbar>
       </AppBar>
     </div>
   );
 }
 
-const getLoginStatus = status =>console.log("status is",status)
+
+
 
 const mapStateToProps = state => {
-  console.log("map state inside visible to do list",state)
+  //console.log("map state inside visible to do list",state)
   return ({
   status: getLoginStatus(state.userStatus)
 })}
 
+const mapDispatchToProps = dispatch => {
+  //console.log("dispatch called in visible to do list",dispatch)
+  return ({
+      logout: status => dispatch(setUserLoginStatus(status))
+})}
+
 export default connect(
-  mapStateToProps
+  null,mapDispatchToProps
 )(Header)
 
 

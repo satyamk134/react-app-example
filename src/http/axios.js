@@ -1,4 +1,12 @@
-const axios = require('axios')
+import React from 'react';
+import Button from '@material-ui/core/Button';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+import { makeStyles } from '@material-ui/core/styles';
+import CustomizedSnackbars  from './snackbar'
+import {ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
+const axios = require('axios');
 
 
 const instance = axios.create({
@@ -13,16 +21,27 @@ instance.interceptors.request.use(config => {
     return config;
   }, error => {
     // handle the error
+    console.log("Error in http ",error)
     return Promise.reject(error);
 });
 
 instance.interceptors.response.use(apiResponse => {
     // perform a task before the request is sent
     console.log('response received',apiResponse.data);
-  
+    
     return apiResponse;
   }, error => {
     // handle the error
+    console.log("Error in http "+JSON.stringify(error.response))
+
+    if(error.response.status == 403) {
+       toast.error(error.response.data.err.msg)
+ 
+       
+        
+        //alert("403 http status error");
+       
+    }
     return Promise.reject(error);
 });
 
@@ -33,8 +52,6 @@ class Api {
         
     }
     
-    
-
     getRequest({path,data}) {
         console.log("came iside get request",data)
         let params = data

@@ -7,25 +7,33 @@ import Users from  './components/users/users'
 import Contact from './components/contact-us/contact-us'
 import Header from './components/header/header';
 import Todo from './components/todo/todo'
-import { Route, Link, BrowserRouter as Router,Switch } from 'react-router-dom';
+import { Route, Link, BrowserRouter as Router,Switch, Redirect } from 'react-router-dom';
 import { Provider } from 'react-redux'
 import rootReducer from './reducers'
 import { createStore } from 'redux';
 import login from './components/login/login';
+import Register from './components/Register';
 import HomeLayout from './layouts/home/home';
 import AppLayout from './layouts/app/app';
 import TextField from '@material-ui/core/TextField';
-import NotFound from './components/NotFound'
+import NotFound from './components/NotFound';
+import PrivateRoute from './components/privateRoute';
+import { ToastContainer, toast } from 'react-toastify';
 const store = createStore(rootReducer)
 const routing = (
   <React.StrictMode>
+  <ToastContainer></ToastContainer>
   <Provider store={store}>
   <Router>
      <Switch>
-      <Route exact path="/" component={login} />
-      <Route path="/dashboard" component={AppLayout} />
-      <Route path="/login" component={login} />
-      <Route path="/login/?id" component={login} />
+      {/* <Route exact path="/" render={(history)=>(<Redirect to='/login' />)} /> */}
+      <Route exact path="/" component={HomeLayout} />
+      <Route  path="/login" component={HomeLayout} />
+     
+      <PrivateRoute path="/dashboard" component={AppLayout}>
+      </PrivateRoute>
+      <Route  path='/register' component={Register} />
+      
       <Route path="/users" component={Users} />
       <Route path="/contact" component={Contact} />
        <Route path="*" component={NotFound} />

@@ -16,5 +16,9 @@ loginService.authorizeUser = ({access_token}) =>{
    return api.postRequest({path:'auth/authorizeUser', data: {access_token: access_token}})
 }
 
+loginService.login = (data)=>{
+   return api.postRequest({path:'auth/login', data: {...data}})
+}  
+
 
 export default loginService
