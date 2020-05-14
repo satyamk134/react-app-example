@@ -4,11 +4,13 @@ import Button from '@material-ui/core/Button';
 //const routeToloc = ()=>withRouter(({history})=>history.push('new-location'))
 
 
-const ButtonLink = withRouter(({ history,link,text,color,onClick }) => (
+const ButtonLink = withRouter(({ history,link,text,color,onClick }) => {
+  console.log("conclic is",onClick)
+  return (
     <Button variant="contained" color={color} type='button'
-    onClick={() => { onClick() }}>
+    onClick={() => onClick(history) }>
     {text} 
   </Button>
 
-))
+)})
 export default ButtonLink

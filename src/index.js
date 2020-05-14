@@ -12,7 +12,7 @@ import { Provider } from 'react-redux'
 import rootReducer from './reducers'
 import { createStore } from 'redux';
 import login from './components/login/login';
-import Register from './components/Register';
+import {RegisterComp} from './components/Register';
 import HomeLayout from './layouts/home/home';
 import AppLayout from './layouts/app/app';
 import TextField from '@material-ui/core/TextField';
@@ -32,7 +32,7 @@ const routing = (
      
       <PrivateRoute path="/dashboard" component={AppLayout}>
       </PrivateRoute>
-      <Route  path='/register' component={Register} />
+      <Route  path='/register' component={RegisterComp} />
       
       <Route path="/users" component={Users} />
       <Route path="/contact" component={Contact} />

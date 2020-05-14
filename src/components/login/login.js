@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom';
+import { withRouter,Redirect } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
@@ -8,7 +8,6 @@ import loginService from '../../http/login.service';
 import qs from 'qs'
 
 import ButtonLink from '../ButtonLink';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import { browserHistory } from 'react-router';
 import { setUserLoginStatus } from '../../actions/index'
@@ -99,6 +98,11 @@ class login extends React.Component {
 
     }
 
+    
+    reDirectToRegister =  ()=> {
+        return (history)=>history.push('/login/register');
+    }
+
     loginHandler = () => {
         console.log("Loggin happened");
         let history = useHistory();
@@ -151,33 +155,14 @@ class login extends React.Component {
                                 <div className="login-register-btn">
                                     <ButtonLink type="submit" link="dashboard" text="LOGIN" color="primary" onClick={submitForm} />
                                     <div className="register-btn-wrapper">
-                                        <ButtonLink className="register-btn" color="secondary" link="register" text="REGISTER" />
+                                        <ButtonLink className="register-btn" color="secondary" link="register" text="REGISTER" onClick={this.reDirectToRegister()} />
                                     </div>
                                 </div>
                             </div>
                         </Form>
                     )}
                     </Formik>
-                    {/* <form noValidate autoComplete="off" className="form-elements">
-
-                        <div className="third-party-login-btns">
-                            <div className='continute-with-google' onClick={this.continueWithGoogleHandler}>
-
-                            </div>
-                            <div className='continute-with-google'>
-
-                            </div>
-                        </div>
-
-                        <TextField id="standard-basic" label="Email" onClick />
-                        <TextField id="standard-basic" label="Password" />
-                        <div className="login-register-btn">
-                            <ButtonLink link="dashboard" text="LOGIN" color="primary" onClick={this.loginHandler}/>
-                            <div className="register-btn-wrapper">
-                                <ButtonLink className="register-btn" color="secondary" link="register" text="REGISTER" />
-                            </div>
-                        </div>
-                    </form> */}
+                    
                 </div>
             </div>
         )

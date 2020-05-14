@@ -24,6 +24,41 @@ export const setUserLoginStatus =loginStatus =>{
     loginStatus
 })}
 
+export const setRegisterStep = registerStep =>{
+    console.log("registerStep",registerStep)
+    console.log(({
+        type: 'SET_REGISTER_STEP',
+        registerStep
+    }))
+    return ({
+    type: 'SET_REGISTER_STEP',
+    registerStep
+})}
+
+export const addPersonalInfo = ({emailId, password,firstName,lastName}) => {
+    //console.log("registerStep",registerStep)
+    console.log(({
+        type: 'ADD_PERSONAL_INFO',
+        password,
+        emailId,
+        firstName,
+        lastName
+    }))
+    return ({
+        type: 'ADD_PERSONAL_INFO',
+        password,
+        emailId,
+        firstName,
+        lastName
+})}
+
+export const addPaymentInfo = ({accountNumber, panNumber}) => {  
+    return ({
+        type: 'ADD_PAYMENT_INFO',
+        accountNumber,
+        panNumber
+})}
+
 export const VisibilityFilters = {
     SHOW_ALL: 'SHOW_ALL',
     SHOW_COMPLETED: 'SHOW_COMPLETED',
