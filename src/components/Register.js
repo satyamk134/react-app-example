@@ -8,9 +8,6 @@ import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import { connect } from 'react-redux'
-import { Formik, Form, Field } from 'formik';
-import * as Yup from 'yup';
-import TextField from '@material-ui/core/TextField';
 import {setRegisterStep, addPaymentInfo, addPersonalInfo} from '../actions/index';
 import PersonalInfo from './PersonalInfo';
 import PaymentInfo from './PaymentInfo';
@@ -19,6 +16,7 @@ import loginService from '../http/login.service'
 import { toast } from 'react-toastify'
 import  { useHistory } from 'react-router-dom';
 import ButtonLink from '../components/ButtonLink';
+import Header from '../components/header/header';
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '40%',
@@ -63,7 +61,7 @@ function Register({currentStep,gotoLastStep,newUserDetails,intilisePersonalInfo,
   const handleEdit = ()=>gotoLastStep(2)
 
   const createAccount = () => {
-        console.log("user info to create account",newUserDetails);
+       
         return loginService.createUser(newUserDetails)
         .then(response=>{
             intilisePersonalInfo();
@@ -76,7 +74,10 @@ function Register({currentStep,gotoLastStep,newUserDetails,intilisePersonalInfo,
   }
 
   return (
-    <div className={classes.root}>
+    <div>
+        <Header />
+        <div className={classes.root}>
+
       <Stepper activeStep={currentStep} orientation="vertical" >
         {steps.map((label, index) => (
           <Step key={label}>
@@ -114,22 +115,19 @@ function Register({currentStep,gotoLastStep,newUserDetails,intilisePersonalInfo,
             Back
           </Button>
           <ButtonLink color="secondary" link="register" text="CREATE"  onClick={createAccount} className={classes.button} />
-          {/* <Button onClick={createAccount} className={classes.button}>
-            Create Account
-          </Button> */}
+         
         </Paper>
       )}
     </div>
+    </div>
+    
   );
 }
 
-const changeStep = (prev)=>{
-    console.log("prev is",prev)
-        return prev+1
-}
+
 
 const mapStateToProps = state => {
-    console.log("map state inside visible to do list", state)
+   
     return ({
         currentStep: state.registerStep,
         newUserDetails:{...state.personalInfo, ...state.paymentInfo}

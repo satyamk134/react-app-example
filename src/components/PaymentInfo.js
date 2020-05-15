@@ -18,9 +18,7 @@ const LoginSchema = Yup.object().shape({
 });
 const PaymentInfo  = ({incrementStep,decrementStep,initialPayemntInfo,currentStep,addPayment})=>{
     //console.log("setRegisterStep",setRegisterStep)
-    const nextStepHandler = ()=>{
-        incrementStep(currentStep+1)
-    }
+   
 
     const prevStepHandler = ()=>{
         decrementStep(currentStep-1)
@@ -30,8 +28,7 @@ const PaymentInfo  = ({incrementStep,decrementStep,initialPayemntInfo,currentSte
     validationSchema={LoginSchema}
     onSubmit={values => {
         // same shape as initial values
-        console.log("form submitted===========>")
-        console.log(values);
+       
         incrementStep(currentStep+1);
         addPayment(values)
         /**
@@ -82,7 +79,7 @@ const PaymentInfo  = ({incrementStep,decrementStep,initialPayemntInfo,currentSte
 
 //const PersonalInfoComp =  connect(mapStateToProps,mapDispatchToProps)(PersonalInfo);
 const mapStateToProps = state => {
-    console.log("map state inside visible to do list", state)
+   
     return ({
         currentStep: state.registerStep,
         initialPayemntInfo:state.paymentInfo
@@ -90,7 +87,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => {
-    console.log("dispatch called in visible to do list", dispatch)
+   
     return ({
         incrementStep: step => dispatch(setRegisterStep(step)),
         decrementStep: step => dispatch(setRegisterStep(step)),

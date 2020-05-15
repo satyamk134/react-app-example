@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from 'react-redux'
-import { withRouter,Redirect } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
@@ -9,7 +8,7 @@ import qs from 'qs'
 
 import ButtonLink from '../ButtonLink';
 import TextField from '@material-ui/core/TextField';
-import { browserHistory } from 'react-router';
+
 import { setUserLoginStatus } from '../../actions/index'
 import './login.scss';
 
@@ -27,19 +26,19 @@ class login extends React.Component {
     constructor(props) {
         super(props)
         this.props.history.listen((location, action) => {
-            console.log("on route change");
+           
         });
 
     }
 
     continueWithGoogleHandler = () => {
-        console.log("continute with google called");
+      
         //call the backendEndpoint to get the google consent screen
         loginService.getGoogleConsent()
             .then(response => {
-                console.log("response of google consent is", response);
+               
                 let resp = response.data;
-                if (resp.status == 'success') {
+                if (resp.status === 'success') {
                     window.open(resp.url, '_self')
                 }
             })
@@ -52,16 +51,15 @@ class login extends React.Component {
     contiuteWithLocalHandler = ({email:emailId, password})=>{
         loginService.login({emailId, password})
         .then(response=>{
-            console.log("Response is",response);
+          
             this.reDirectToDashboard(response.data.data)
         })
     }
 
     componentDidMount() {
-        console.log("did mout called")
-        console.log("props are", this.props)
+       
         let code = qs.parse(this.props.location.search, { ignoreQueryPrefix: true }).code
-        console.log("code is", code)
+       
         if (code) {
 
             //call the google end point to login and redirect to dashboard
@@ -72,13 +70,13 @@ class login extends React.Component {
              */
             loginService.getAccessToken({ access_token: code })
                 .then(response => {
-                    console.log("resp=====> is", response);
+                   
                     //this.reDirectToDashboard(response.data);
                     localStorage.setItem('token', response.data.id_token);
                     return loginService.authorizeUser({ access_token: response.data.access_token })
                 })
                 .then(response => {
-                    console.log("Response is", response)
+                   
                     this.reDirectToDashboard(response.data.data);
                 })
 
@@ -100,11 +98,11 @@ class login extends React.Component {
 
     
     reDirectToRegister =  ()=> {
-        return (history)=>history.push('/login/register');
+        return (history)=>history.push('/register');
     }
 
     loginHandler = () => {
-        console.log("Loggin happened");
+        
         let history = useHistory();
         history.push("/users");
     }
@@ -121,8 +119,7 @@ class login extends React.Component {
                         validationSchema={LoginSchema}
                         onSubmit={values => {
                             // same shape as initial values
-                            console.log("form submitted===========>")
-                            console.log(values);
+                          
                             this.contiuteWithLocalHandler(values);
                             /**
                              * when validation is successful login the user
@@ -171,24 +168,16 @@ class login extends React.Component {
 
 
 }
-const getLoginStatus = yserStatus => {
-    console.log("user status is", yserStatus);
-}
-const mapStateToProps = state => {
-    console.log("map state inside visible to do list", state)
-    return ({
-        todos: getLoginStatus(state.userStatus)
-    })
-}
+
 
 const mapDispatchToProps = dispatch => {
-    console.log("dispatch called in visible to do list", dispatch)
+   
     return ({
         setUserLoginStatus: status => dispatch(setUserLoginStatus(status))
     })
 }
 
 export default connect(
-    mapStateToProps,
+    null,
     mapDispatchToProps
 )(login)

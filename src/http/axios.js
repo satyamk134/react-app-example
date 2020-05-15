@@ -1,5 +1,5 @@
 
-import {ToastContainer, toast } from 'react-toastify'
+import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 const axios = require('axios');
 
@@ -10,7 +10,7 @@ const instance = axios.create({
 
 instance.interceptors.request.use(config => {
     // perform a task before the request is sent
-    console.log('Request was sent',config);
+    
     let token = localStorage.getItem('token');
     config.headers['Authorization'] = 'Bearer '+token
     return config;
@@ -22,14 +22,14 @@ instance.interceptors.request.use(config => {
 
 instance.interceptors.response.use(apiResponse => {
     // perform a task before the request is sent
-    console.log('response received',apiResponse.data);
+   
     
     return apiResponse;
   }, error => {
     // handle the error
     console.log("Error in http "+JSON.stringify(error.response))
 
-    if(error.response.status == 403) {
+    if(error.response.status === 403) {
        toast.error(error.response.data.err.msg)
  
        
@@ -48,7 +48,7 @@ class Api {
     }
     
     getRequest({path,data}) {
-        console.log("came iside get request",data)
+      
         let params = data
         return instance.get(path,{params});
     }
@@ -57,21 +57,7 @@ class Api {
         return instance.post(path,data);
     }
 
-    makeRequest(method){
-        switch (method) {
-            case 'get':
-                console.log('Handle get request')
-                break;
-
-            case 'post':
-                console.log("handle post request");
-
-            case 'put':
-                console.log("handle put request");
-            default:
-                break;
-        }
-    }
+   
 }
 
 

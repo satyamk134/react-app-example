@@ -6,7 +6,7 @@ export const  addTodo = text =>({
 })
 
 export const setVisibilityFilter = filter =>{
-    console.log("set visibilty filter called")
+   
     return({
     type: 'SET_VISIBILITY_FILTER',
     filter
@@ -18,32 +18,21 @@ export const toggleTodo = id =>({
 })
 
 export const setUserLoginStatus =loginStatus =>{
-    console.log("login status",loginStatus)
+   
     return ({
     type: 'SET_LOGIN_STATUS',
     loginStatus
 })}
 
 export const setRegisterStep = registerStep =>{
-    console.log("registerStep",registerStep)
-    console.log(({
-        type: 'SET_REGISTER_STEP',
-        registerStep
-    }))
+   
     return ({
     type: 'SET_REGISTER_STEP',
     registerStep
 })}
 
 export const addPersonalInfo = ({emailId, password,firstName,lastName}) => {
-    //console.log("registerStep",registerStep)
-    console.log(({
-        type: 'ADD_PERSONAL_INFO',
-        password,
-        emailId,
-        firstName,
-        lastName
-    }))
+   
     return ({
         type: 'ADD_PERSONAL_INFO',
         password,

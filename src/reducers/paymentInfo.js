@@ -1,5 +1,5 @@
 const paymentInfo = (state = {accountNumber:"", panNumber:""}, action) => {
-    console.log('todos called',action);
+   
       switch (action.type) {
         case 'ADD_PAYMENT_INFO':
           return {

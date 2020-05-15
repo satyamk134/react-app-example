@@ -2,10 +2,10 @@ import React from "react";
 import login from '../../components/login/login'
 import Header from '../../components/header/header'
 import {RegisterComp} from '../../components/Register'
-import { Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 function HomeLayout() {
-    console.log("this is home layout component");
-    const menu = ['Home']
+   
+   
     return (
         <div>
             

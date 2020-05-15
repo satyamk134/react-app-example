@@ -1,5 +1,5 @@
 const todos = (state = [], action) => {
-  console.log('todos called');
+
     switch (action.type) {
       case 'ADD_TODO':
         return [

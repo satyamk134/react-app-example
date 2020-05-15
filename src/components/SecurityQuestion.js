@@ -12,7 +12,7 @@ const secutiryQuesSchema = Yup.object().shape({
         .max(50, 'Too Long!'),
 });
 const SecurityQuestion = ({decrementStep,incrementStep,currentStep})=>{
-    //console.log("setRegisterStep",setRegisterStep)
+    
     const nextHandler = ()=>{
         incrementStep(currentStep+1)
     }
@@ -27,8 +27,7 @@ const SecurityQuestion = ({decrementStep,incrementStep,currentStep})=>{
     validationSchema={secutiryQuesSchema}
     onSubmit={values => {
         // same shape as initial values
-        console.log("form submitted===========>")
-        console.log(values);
+      
         this.contiuteWithLocalHandler(values);
         /**
          * when validation is successful login the user
@@ -74,14 +73,14 @@ const SecurityQuestion = ({decrementStep,incrementStep,currentStep})=>{
 
 //const PersonalInfoComp =  connect(mapStateToProps,mapDispatchToProps)(PersonalInfo);
 const mapStateToProps = state => {
-    console.log("map state inside visible to do list", state)
+
     return ({
         currentStep: state.registerStep
     })
 }
 
 const mapDispatchToProps = dispatch => {
-    console.log("dispatch called in visible to do list", dispatch)
+    
     return ({
         incrementStep: step => dispatch(setRegisterStep(step)),
         decrementStep: step =>dispatch(setRegisterStep(step))

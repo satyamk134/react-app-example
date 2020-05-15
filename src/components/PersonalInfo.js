@@ -24,21 +24,13 @@ const personaInfoSchema = Yup.object().shape({
 });
 const PersonalInfo  = ({incrementStep,decrementStep, addPersonalInfo,currentStep,initialInfo})=>{
     //console.log("setRegisterStep",setRegisterStep)
-    const nextStepHandler = ()=>{
-        incrementStep(currentStep+1);
-        
-    }
-
-    const prevStepHandler = ()=>{
-        decrementStep(currentStep-1)
-    }
+   
     return <Formik validateOnChange={true}
     initialValues={initialInfo} 
     validationSchema={personaInfoSchema}
     onSubmit={values => {
         // same shape as initial values
-        console.log("form submitted===========>")
-        console.log(values);
+        
         incrementStep(currentStep+1)
         addPersonalInfo(values)
         /**
@@ -51,20 +43,20 @@ const PersonalInfo  = ({incrementStep,decrementStep, addPersonalInfo,currentStep
     <Form className="form-elements">
        
 
-       <Field id="standard-basic" error={errors.firstName && touched.firstName ? true : false}
+       <Field id="standard-basic1" error={errors.firstName && touched.firstName ? true : false}
             label="First Name" name="firstName" as={TextField}
             helperText={(errors.firstName && touched.firstName) && errors.firstName}
         />
-        <Field id="standard-basic" error={errors.lastName && touched.lastName ? true : false}
+        <Field id="standard-basic2" error={errors.lastName && touched.lastName ? true : false}
             label="Last Name" name="lastName" as={TextField}
             helperText={(errors.lastName && touched.lastName) && errors.lastName}
         />
-        <Field id="standard-basic" error={errors.emailId && touched.emailId ? true : false}
+        <Field id="standard-basic3" error={errors.emailId && touched.emailId ? true : false}
             label="Email" name="emailId" as={TextField}
             helperText={(errors.emailId && touched.emailId) && errors.emailId}
         />
 
-        <Field id="standard-basic1" type="password"
+        <Field id="standard-basic4" type="password"
             error={errors.password && touched.password ? true : false}
             label="Password" name="password" as={TextField}
             helperText={(errors.password && touched.password) && errors.password}
@@ -87,14 +79,10 @@ const PersonalInfo  = ({incrementStep,decrementStep, addPersonalInfo,currentStep
    
 }
 
-const getPersonalInfo = (personalInfo)=>{
-    console.log("pernal info",personalInfo)
-    return {email:personalInfo.emailId, password: personalInfo.password }
-}
 
 //const PersonalInfoComp =  connect(mapStateToProps,mapDispatchToProps)(PersonalInfo);
 const mapStateToProps = state => {
-    console.log("map state inside visible to do list", state.personalInfo)
+    
     return ({
         currentStep: state.registerStep,
         initialInfo:state.personalInfo
@@ -102,7 +90,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => {
-    console.log("dispatch called in visible to do list", dispatch)
+   
     return ({
         incrementStep: step => dispatch(setRegisterStep(step)),
         decrementStep: step =>dispatch(setRegisterStep(step)),

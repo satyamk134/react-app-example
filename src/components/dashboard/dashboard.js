@@ -3,7 +3,7 @@ class Dashboard extends React.Component {
     
 
     componentDidMount() {
-        console.log("mount componet called")
+       
     }
 
 

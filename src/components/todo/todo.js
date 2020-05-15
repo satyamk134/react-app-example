@@ -3,7 +3,7 @@ import Api from '../../http/axios'
 import AddTodo from  '../../containers/AddTodo';
 import VisibleTodoList  from  '../../containers/VisibleTodoList';
 import Footer from  '../Footer'
-const axios = require('axios')
+
 
 class todo extends React.Component {
     constructor() {
@@ -25,23 +25,19 @@ class todo extends React.Component {
 
         this.api.getRequest()
             .then(response => {
-                console.log("response is", response);
+               
                 this.setState({ users: response.data.data })
             })
-        // axios.get('http://localhost:4545/file/users')
-        //     .then(response => {
-        //         console.log("response is", response);
-        //         this.setState({ users: response.data.data })
-        //     })
+        
     }
 
     handleChange = event => {
         this.setState({ newTask: event.target.value });
-        console.log("new task is", this.state.newTask)
+       
     }
 
     addTask = (e) => {
-        console.log("new task is", this.state.newTask);
+       
         this.setState(prevState => ({ tasks: [...prevState.tasks, { task: this.state.newTask }] }));
         this.setState({ newTask: "" })
         //this.setState({tasks:[{task:this.state.newTask}]})

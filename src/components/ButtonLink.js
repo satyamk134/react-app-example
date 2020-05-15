@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 
 
 const ButtonLink = withRouter(({ history,link,text,color,onClick }) => {
-  console.log("conclic is",onClick)
+  
   return (
     <Button variant="contained" color={color} type='button'
     onClick={() => onClick(history) }>

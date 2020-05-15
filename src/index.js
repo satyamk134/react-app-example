@@ -1,24 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+
 import * as serviceWorker from './serviceWorker';
 import Users from  './components/users/users'
 import Contact from './components/contact-us/contact-us'
-import Header from './components/header/header';
-import Todo from './components/todo/todo'
-import { Route, Link, BrowserRouter as Router,Switch, Redirect } from 'react-router-dom';
+
+import { Route,  BrowserRouter as Router,Switch } from 'react-router-dom';
 import { Provider } from 'react-redux'
 import rootReducer from './reducers'
 import { createStore } from 'redux';
-import login from './components/login/login';
+
 import {RegisterComp} from './components/Register';
 import HomeLayout from './layouts/home/home';
 import AppLayout from './layouts/app/app';
-import TextField from '@material-ui/core/TextField';
+
 import NotFound from './components/NotFound';
 import PrivateRoute from './components/privateRoute';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 const store = createStore(rootReducer)
 const routing = (
   <React.StrictMode>
