@@ -1,11 +1,7 @@
 import React  from 'react'
 import { connect } from 'react-redux'
 import { setUserLoginStatus } from '../actions/index'
-import {
-    Route,
-    Redirect,
-  
-  } from "react-router-dom";
+import {Route,Redirect} from "react-router-dom";
 
 
 const checkIfTokenValid = () => {
@@ -19,7 +15,7 @@ const checkIfTokenValid = () => {
     }
 }
 const PrivateRoute = ({component:Component,bordcastLogin, ...rest})=>{
-    
+   
     if(checkIfTokenValid() === true){
         bordcastLogin(false);
     } 

@@ -5,6 +5,31 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import {setRegisterStep, addPersonalInfo} from '../actions/index';
 import { connect } from 'react-redux'; 
+const debounce = (func, delay) => {
+    let inDebounce
+    return function() {
+      const context = this
+      const args = arguments
+      clearTimeout(inDebounce)
+      inDebounce = setTimeout(() => func.apply(context, args), delay)
+    }
+}
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+const validate = (values /* only available when using withFormik */) => {
+    
+    if(values.emailId.length>0){
+        // return sleep(2000).then(() => {
+        //     const errors = {};
+        //     if (['admin@gmail.com', 'null', 'god'].includes(values.emailId)) {
+        //       errors.emailId = 'Nice try';
+        //     }
+        //     // ...
+        //     //console.log(errors)
+        //     return errors;
+        //   });
+    }
+    
+  };
 const personaInfoSchema = Yup.object().shape({
     emailId: Yup.string()
         .email('Invalid Email')
@@ -18,15 +43,16 @@ const personaInfoSchema = Yup.object().shape({
         .max(50, 'Too Long!')
         .required('Required'),
     lastName: Yup.string()
-    .min(3, 'Too Short!')
-    .max(50, 'Too Long!')
-    .required('Required'),
+        .min(3, 'Too Short!')
+        .max(50, 'Too Long!')
+        .required('Required'),
 });
 const PersonalInfo  = ({incrementStep,decrementStep, addPersonalInfo,currentStep,initialInfo})=>{
     //console.log("setRegisterStep",setRegisterStep)
    
     return <Formik validateOnChange={true}
     initialValues={initialInfo} 
+    validate={validate}
     validationSchema={personaInfoSchema}
     onSubmit={values => {
         // same shape as initial values
@@ -36,7 +62,6 @@ const PersonalInfo  = ({incrementStep,decrementStep, addPersonalInfo,currentStep
         /**
          * when validation is successful login the user
         */
-       
     }}
 
 >{({ errors, touched,isValid,dirty, validateField, submitForm, handleSubmit, values, handleChange }) => (

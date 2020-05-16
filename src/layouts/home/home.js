@@ -15,7 +15,7 @@ function HomeLayout() {
                 <Route exact path='/' component={login} />
                 <Route exact path='/login' component={login} />
                 <Route path="/login/?id" component={login} />
-                <Route path='/login/register' component={RegisterComp} />
+                <Route path='/login/register'  component={RegisterComp} />
             </Switch>
         </div>
         

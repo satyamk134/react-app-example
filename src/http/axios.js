@@ -27,9 +27,10 @@ instance.interceptors.response.use(apiResponse => {
     return apiResponse;
   }, error => {
     // handle the error
-    console.log("Error in http "+JSON.stringify(error.response))
+    
 
     if(error.response.status === 403) {
+       console.log("ERror is",error.response.data)
        toast.error(error.response.data.err.msg)
  
        
@@ -56,8 +57,6 @@ class Api {
     postRequest({path,data}) {
         return instance.post(path,data);
     }
-
-   
 }
 
 

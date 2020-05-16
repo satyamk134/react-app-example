@@ -5,10 +5,8 @@ import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import loginService from '../../http/login.service';
 import qs from 'qs'
-
 import ButtonLink from '../ButtonLink';
 import TextField from '@material-ui/core/TextField';
-
 import { setUserLoginStatus } from '../../actions/index'
 import './login.scss';
 
@@ -57,6 +55,8 @@ class login extends React.Component {
     }
 
     componentDidMount() {
+
+        
        
         let code = qs.parse(this.props.location.search, { ignoreQueryPrefix: true }).code
        
@@ -87,11 +87,23 @@ class login extends React.Component {
     }
 
     reDirectToDashboard = ({ token, lastName, role, emailId }) => {
-
+   
+        localStorage.removeItem('token');
         localStorage.setItem('token', token);
         localStorage.setItem('userInfo', JSON.stringify({ lastName: lastName, role: role, emailId: emailId }))
         this.props.setUserLoginStatus(true)
-        this.props.history.push('/dashboard')
+
+        /**
+         * Redirect based the role
+         * -->customer redirect to products
+         * -->admin redirect to dashboard
+         */
+        if(role === 'admin') {
+            this.props.history.push('/dashboard')
+        }else{
+            this.props.history.push("/products")
+        }
+        
         //history.push("/home");
 
     }
@@ -169,6 +181,10 @@ class login extends React.Component {
 
 }
 
+const mapStateToprops = state=>{
+    return ({loggedIn:state.loginStatus })
+}
+
 
 const mapDispatchToProps = dispatch => {
    
@@ -178,6 +194,6 @@ const mapDispatchToProps = dispatch => {
 }
 
 export default connect(
-    null,
+    mapStateToprops,
     mapDispatchToProps
 )(login)
