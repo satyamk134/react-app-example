@@ -51,12 +51,15 @@ const  Header = ({logout}) => {
     }else{
       //console.log("user is logged in with valid token");
       let userInfo = JSON.parse(localStorage.getItem('userInfo'))
-      if(userInfo.role === 'admin') {
-        history.push('/dashboard')
-      }else{
-        history.push("/products")
+      if(userInfo){
+        if(userInfo.role === 'admin') {
+          history.push('/dashboard')
+        }else{
+          history.push("/products")
+        }
+        setlogin(true)
       }
-      setlogin(true)
+     
     }
    
   },[history]);
