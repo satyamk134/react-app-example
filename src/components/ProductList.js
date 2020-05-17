@@ -5,6 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import './product.scss'
 import ButtonLink from './ButtonLink'
 import ProductService from '../http/Product.service'
+import Product from'./product'
 const useStyles = makeStyles((theme) => ({
     root: {
       flexGrow: 1,
@@ -45,26 +46,9 @@ const Products = ()=>{
       <React.Fragment>
         
         {products.map((product,index)=>(<Grid key = {index} item xs={3}>
-            <Paper className={classes.paper}>
-                <div className="image-container">
-                        <img alt="shoes" src={product.images[0].link} />
-                </div>
-                <div className="">
-        <h3>{product.productName}</h3>
-                </div>
-                <div className="">
-                    Rs {product.sellingPrice}
-                </div>
-
-                <div className="card-footer">
-                   <ButtonLink color="secondary" link="register" text="ADD TO CART"></ButtonLink>
-                </div>
-            
-            </Paper>
+            <Product  product={product}/>
         </Grid>))
         }
-       
-       
       </React.Fragment>
   
     );
